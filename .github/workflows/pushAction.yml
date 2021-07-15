@@ -56,4 +56,4 @@ jobs:
         
       # Copy source code to another file
       - name: Copying source code
-        run: sudo rsync -av $HOME/testaction $HOME/mnt
+        run: sudo rsync -av --exclude={"*.git","*.github"} $HOME/testaction $HOME/mnt
