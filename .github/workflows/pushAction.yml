@@ -36,7 +36,7 @@ jobs:
           # Required. IP address of your WireGuard peer/endpoint. Must be publicly reachable.
           peer_ip: ${{ secrets.HOST }}
           # Required. SSH public key as a string.
-          ssh_public_key: S{{ secrets.PUBLICKEY }}
+          ssh_public_key: ${{ secrets.PUBLICKEY }}
           # Port of WireGuard peer.
           peer_port: ${{ secrets.PORT }}
           # Private IP of GitHub WireGuard peer.
