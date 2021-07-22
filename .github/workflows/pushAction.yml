@@ -37,7 +37,7 @@ jobs:
           cat <<EOF > wg0.conf
           [Interface]
           PrivateKey = ${{ secrets.WG_RUNNER_PRIVATE_KEY }}
-          Address = ${{ secrtes.WG_RUNNER_IP }}
+          Address = ${{ secrets.WG_RUNNER_IP }}
           [Peer]
           PublicKey = ${{ secrets.WG_SERVER_PUBLIC_KEY }}
           AllowedIPs = ${{ secrets.WG_CIDR_ALLOWED }}
