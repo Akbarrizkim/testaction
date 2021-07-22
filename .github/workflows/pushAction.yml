@@ -65,7 +65,11 @@ jobs:
 #           ssh_connection_timeout: '300'
 #           # Seconds to timeout SSH session.
 #           session_timeout: 3600
-          
+      
+      # PING Server
+      - name: Ping Remote Server
+        run: ping -c 3 10.184.0.3
+      
       # SCP TAR files containing repository to remote server
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
