@@ -29,6 +29,26 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - name: Install Wireguard
+        run: sudo apt-get install wireguard
+        
+      - name: Create Wireguard Tunnel Configuration
+        run: |
+          cat <<EOF > wg0.conf
+          [Interface]
+          PrivateKey = ${{ secrets.WG_RUNNER_PRIVATE_KEY }}
+          Address = ${{ secrtes.WG_RUNNER_IP }}
+          [Peer]
+          PublicKey = ${{ secrets.WG_SERVER_PUBLIC_KEY }}
+          AllowedIPs = ${{ secrets.WG_CIDR_ALLOWED }}
+          Endpoint = ${{ secrets.WG_SERVER_ENDPOINT }}
+          PersistentKeepalive = 15
+          EOF
+          sudo mv $GITHUB_WORKSPACE/wg0.conf /etc/wireguard/
+          
+      - name: Starting Wireguard
+        run: sudo wg-quick up wg0
+
 #       # Install and runs Wireguard to open a VPN channel to the remote server
 #       - name: WireGuard SSH
 #         uses: omahn/wireguard-ssh-github-action@v1.4
