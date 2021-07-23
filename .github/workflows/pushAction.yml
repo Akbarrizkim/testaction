@@ -78,5 +78,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: "hw.txt,index.html"
+          source: "hw.txt,index.html,Dockerfile"
           target: "/etc/mnt"
