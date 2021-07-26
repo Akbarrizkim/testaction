@@ -1,7 +1,10 @@
 #! /usr/bin/bash
 
+IMAGEDATE=$1
+IMAGECOMMITSH=$2
+
 # Pull most recent image from Dockerhub
-sudo docker pull akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
+sudo docker pull akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 
 # Check for running container 
 if [ ! $(docker ps -q -f name=taskactioncontainer) ]; then
@@ -10,7 +13,7 @@ if [ ! $(docker ps -q -f name=taskactioncontainer) ]; then
         -v /etc/mnt/index.html:/usr/share/nginx/html \
         -v /etc/mnt/nginx.conf:/usr/nginx \
         -v /etc/mnt:/usr/nginx/ssl \
-        --name taskactioncontainer akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
+        --name taskactioncontainer akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 else
     #Clean up then run container
     sudo docker rm -f taskactioncontainer
@@ -19,5 +22,5 @@ else
         -v /etc/mnt/index.html:/usr/share/nginx/html \
         -v /etc/mnt/nginx.conf:/usr/nginx \
         -v /etc/mnt:/usr/nginx/ssl \
-        --name taskactioncontainer akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
+        --name taskactioncontainer akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 fi
