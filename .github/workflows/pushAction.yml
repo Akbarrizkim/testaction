@@ -98,6 +98,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: |
-            chmod +x ${ GITHUB_WORKSPACE }/dockerdeploy.sh
-            ${ GITHUB_WORKSPACE }/dockerdeploy.sh
+          script: sh /etc/mnt/deploydocker.sh
