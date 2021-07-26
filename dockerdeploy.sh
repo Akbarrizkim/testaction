@@ -7,12 +7,11 @@ IMAGECOMMITSH=$2
 sudo docker pull akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 
 # Check for running container 
-if [ ! $(docker ps -q -f name=taskactioncontainer) ]; then
+if [ ! $(sudo docker ps -q -f name=taskactioncontainer) ]; then
     # Run container
     sudo docker run -d -p 8000:80 -p 443:443 \
         -v /etc/mnt/index.html:/usr/share/nginx/html \
-        -v /etc/mnt/nginx.conf:/usr/nginx \
-        -v /etc/mnt:/usr/nginx/ssl \
+        -v /etc/mnt:/usr/nginx \
         --name taskactioncontainer akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 else
     #Clean up then run container
@@ -20,7 +19,6 @@ else
 
     sudo docker run -d -p 8000:80 -p 443:443 \
         -v /etc/mnt/index.html:/usr/share/nginx/html \
-        -v /etc/mnt/nginx.conf:/usr/nginx \
-        -v /etc/mnt:/usr/nginx/ssl \
+        -v /etc/mnt:/usr/nginx \
         --name taskactioncontainer akbarezeki/taskaction:dev-$IMAGEDATE-$IMAGECOMMITSH
 fi
