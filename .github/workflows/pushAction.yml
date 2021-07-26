@@ -57,7 +57,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: "hw.txt,index.html,Dockerfile"
+          source: "hw.txt,index.html"
           target: "/etc/mnt"
       
       # Set Up QEMU
@@ -101,4 +101,4 @@ jobs:
           script: |
             sudo docker pull akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
             sudo docker rm -f taskactioncontainer
-            sudo docker run -d -p 8000:80 443:443 --name taskaction akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
+            sudo docker run -d -p 8000:80 -p 443:443 --name taskaction akbarezeki/taskaction:dev-${{ steps.tagstep.outputs.today }}-${{ steps.tagstep.outputs.commitsh }}
